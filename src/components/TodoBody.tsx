@@ -1,4 +1,3 @@
-import { Alert, Card, InputGroup, FormControl, Button } from "react-bootstrap";
 import { ITodo } from "../interfaces";
 
 type TodoBodyProps = {
@@ -8,7 +7,7 @@ type TodoBodyProps = {
 const TodoBody: React.FC<TodoBodyProps> = ({ todo }) => {
   return (
     <>
-      {todo.body.map((body) => (
+      {/* {todo.body.map((body) => (
         <Card.Body key={body}>
           <InputGroup className="mb-3">
             <InputGroup.Prepend>
@@ -30,7 +29,7 @@ const TodoBody: React.FC<TodoBodyProps> = ({ todo }) => {
             <FormControl id="basic-url" aria-describedby="basic-addon3" />
             <Button variant="success">Добавить</Button>
             </InputGroup>
-      </Card.Body>
+      </Card.Body> */}
     </>
   );
 };

@@ -1,10 +1,4 @@
 import { useState } from "react";
-import {
-  InputGroup,
-  Dropdown,
-  DropdownButton,
-  FormControl,
-} from "react-bootstrap";
 import { ITodo } from "../interfaces";
 
 type MainInputProps = {
@@ -13,37 +7,38 @@ type MainInputProps = {
 
 const MainInput: React.FC<MainInputProps> = ({ addTodo }) => {
   const [title, setTitle] = useState<string>("");
+  const [isEmpty, setEmpty] = useState<boolean>(false);
+  const addHandler = () => {
+    if(!title) {
+      setEmpty(true)
+    }else{
+      setEmpty(false)
+      addTodo(title)
+      setTitle("")
+    }
+    
+  };
 
   return (
-    <InputGroup>
-      <FormControl
-        placeholder="Recipient's username"
-        aria-label="Recipient's username"
-        aria-describedby="basic-addon2"
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
-      />
-
-      <DropdownButton
-        as={InputGroup.Append}
-        variant="outline-secondary"
-        title="Dropdown"
-        id="input-group-dropdown-2"
-      >
-        <Dropdown.Item
-          onClick={() => {
-            setTitle((prev) => "");
-            addTodo(title);
-          }}
-        >
-          Action
-        </Dropdown.Item>
-        <Dropdown.Item href="#">Another action</Dropdown.Item>
-        <Dropdown.Item href="#">Something else here</Dropdown.Item>
-        <Dropdown.Divider />
-        <Dropdown.Item href="#">Separated link</Dropdown.Item>
-      </DropdownButton>
-    </InputGroup>
+    <section className="section-outer section-addTodo">
+      <div className="section-inner">
+        <div className="section-addTodo-form">
+          <input
+            type="text"
+            className={`section-addTodo-form__input ${isEmpty ? 'no-valid': ''}`}
+            value={title}
+            placeholder={`${isEmpty ? "Нет названия" : 'Введите наименование задачи'}`}
+            onChange={(e) => setTitle(e.target.value)}
+          ></input>
+          <button
+            className="section-addTodo-form__button"
+            onClick={() => addHandler()}
+          >
+            Добавить
+          </button>
+        </div>
+      </div>
+    </section>
   );
 };
 
